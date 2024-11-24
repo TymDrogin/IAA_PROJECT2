@@ -6,9 +6,9 @@
 
 int main(void) {
 
-    int solution[COIN_TYPES_NUM] = {2, 0, 2, 1};
+    int solution[COIN_TYPES_NUM] = {4, 1, 1, 1};
 
-    bool is_valid = is_valid_solution(solution, BASE_COINS, 100);
+    bool is_valid = is_valid_solution(solution, BASE_COINS, 100, 6);
 
     if (is_valid) {
         printf("Valid solution\n");
