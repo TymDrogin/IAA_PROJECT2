@@ -10,9 +10,14 @@ file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.c)
 # Create the executable using only source files
 add_executable(${PROJECT_NAME} ${SOURCES}
         include/common-defines.h
-        include/helper_functions.h)
+        include/helper_functions.h
+        include/file-handler.h
+        include/config.h)
 
 
 add_executable(IAA_PROJECT src/main.c
         src/common-defines.c
-        src/helper_functions.c)
+        src/helper_functions.c
+        src/file-handler.c
+        src/config.c
+)
