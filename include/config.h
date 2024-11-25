@@ -5,13 +5,14 @@
 #define PROGRAM_CONFIGURATION_H
 
 struct Config {
-    int max_num_of_coins;
     float target_sum_in_euros;
+    int coin_types_n;
     float* coin_values;
 };
 typedef struct Config Config;
 
-Config create_config(int max_num_of_coins, float target_sum_in_euros, float* coin_values);
+Config create_config(float target_sum_in_euros, float* coin_values, int coin_types_n);
 void free_config(Config* config);
+void print_config(const Config* config);
 
 #endif //PROGRAM_CONFIGURATION_H

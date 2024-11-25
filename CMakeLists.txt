@@ -7,6 +7,19 @@ set(CMAKE_C_STANDARD 11)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 # Add all `.c` files from the `src` directory as source files
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.c)
+
+
+configure_file(
+        ${CMAKE_SOURCE_DIR}/test.txt  # Source file path
+        ${CMAKE_BINARY_DIR}/test.txt # Destination in the build directory
+        COPYONLY                     # Copy without modification
+)
+
+
+
+
+
+
 # Create the executable using only source files
 add_executable(${PROJECT_NAME} ${SOURCES}
         include/common-defines.h
