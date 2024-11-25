@@ -46,8 +46,12 @@ bool read_file(Config* config, const char* filename) {
         }
     }
 
+
     config->coin_types_n = N;
     config->target_sum_in_euros = V;
     config->coin_values = base_coins;
+
+
+    fclose(file);
     return true;
 }
