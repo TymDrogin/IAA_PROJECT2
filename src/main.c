@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "common-defines.h"
-#include "config.h"
+#include "data.h"
 #include "helper_functions.h"
 #include "file-handler.h"
 
@@ -13,11 +13,11 @@ int main(void) {
     bool is_valid = is_valid_solution(solution, BASE_COINS, BASE_COIN_TYPES_NUM, 100);
 
     char* filename = "test.txt";
-    Config config;
-    if (!read_file(&config, filename)) {
+    Data data;
+    if (!read_file(&data, filename)) {
         printf("Error reading config file\n");
     } else {
-        print_config(&config);
+        print_data(&data);
     }
 
     if (is_valid) {

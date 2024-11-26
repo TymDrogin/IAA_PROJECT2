@@ -4,15 +4,15 @@
 #ifndef PROGRAM_CONFIGURATION_H
 #define PROGRAM_CONFIGURATION_H
 
-struct Config {
+struct Data {
     float target_sum_in_euros;
     int coin_types_n;
     float* coin_values;
 };
-typedef struct Config Config;
+typedef struct Data Data;
 
-Config create_config(float target_sum_in_euros, float* coin_values, int coin_types_n);
-void free_config(Config* config);
-void print_config(const Config* config);
+Data create_data(float target_sum_in_euros, float* coin_values, int coin_types_n);
+void free_data(Data* data);
+void print_data(const Data* data);
 
 #endif //PROGRAM_CONFIGURATION_H

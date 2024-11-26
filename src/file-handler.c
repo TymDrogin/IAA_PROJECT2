@@ -9,7 +9,7 @@
 
 
 
-bool read_file(Config* config, const char* filename) {
+bool read_file(Data* data, const char* filename) {
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
         return false;
@@ -47,9 +47,9 @@ bool read_file(Config* config, const char* filename) {
     }
 
 
-    config->coin_types_n = N;
-    config->target_sum_in_euros = V;
-    config->coin_values = base_coins;
+    data->coin_types_n = N;
+    data->target_sum_in_euros = V;
+    data->coin_values = base_coins;
 
 
     fclose(file);

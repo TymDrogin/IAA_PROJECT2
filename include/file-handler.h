@@ -10,11 +10,11 @@
 
 #include "common-defines.h"
 #include "helper_functions.h"
-#include "config.h"
+#include "data.h"
 
 
 
-bool read_file(Config* config, const char* filename);
+bool read_file(Data* config, const char* filename);
 
 
 
