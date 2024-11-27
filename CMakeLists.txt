@@ -25,7 +25,8 @@ add_executable(${PROJECT_NAME} ${SOURCES}
         include/common-defines.h
         include/helper_functions.h
         include/file-handler.h
-        include/data.h)
+        include/data.h
+        include/alrogithm.h)
 
 
 add_executable(IAA_PROJECT src/main.c
@@ -33,4 +34,5 @@ add_executable(IAA_PROJECT src/main.c
         src/helper_functions.c
         src/file-handler.c
         src/data.c
+        src/algorithm.c
 )

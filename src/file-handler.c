@@ -4,11 +4,6 @@
 
 #include "file-handler.h"
 
-
-
-
-
-
 bool read_file(Data* data, const char* filename) {
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
@@ -50,7 +45,6 @@ bool read_file(Data* data, const char* filename) {
     data->coin_types_n = N;
     data->target_sum_in_euros = V;
     data->coin_values = base_coins;
-
 
     fclose(file);
     return true;

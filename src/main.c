@@ -7,23 +7,18 @@
 
 
 int main(void) {
-
-    int solution[BASE_COIN_TYPES_NUM] = {0, 0, 0, 2};
-
-    bool is_valid = is_valid_solution(solution, BASE_COINS, BASE_COIN_TYPES_NUM, 100);
-
     char* filename = "test.txt";
     Data data;
+
+    printf("Please provide the name of a data file:");
+
+
     if (!read_file(&data, filename)) {
         printf("Error reading config file\n");
+        exit(1);
     } else {
         print_data(&data);
     }
 
-    if (is_valid) {
-        printf("Valid solution\n");
-    } else {
-        printf("Invalid solution\n");
-    }
     return 0;
 }
