@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.29)
 project(IAA_PROJECT2 C)
 
 set(CMAKE_C_STANDARD 11)
@@ -27,12 +27,3 @@ add_executable(${PROJECT_NAME} ${SOURCES}
         include/file-handler.h
         include/data.h
         include/alrogithm.h)
-
-
-add_executable(IAA_PROJECT src/main.c
-        src/common-defines.c
-        src/helper_functions.c
-        src/file-handler.c
-        src/data.c
-        src/algorithm.c
-)
