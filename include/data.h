@@ -5,13 +5,13 @@
 #define PROGRAM_CONFIGURATION_H
 
 struct Data {
-    float target_sum_in_euros;
+    int target_sum_in_cents;
     int coin_types_n;
-    float* coin_values;
+    int* coin_values_in_cents;
 };
 typedef struct Data Data;
 
-Data create_data(float target_sum_in_euros, float* coin_values, int coin_types_n);
+Data create_config(const int target_sum_in_cents, int* coin_values_in_cents, const int coin_types_n);
 void free_data(Data* data);
 void print_data(const Data* data);
 
