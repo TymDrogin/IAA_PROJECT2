@@ -41,10 +41,17 @@ bool read_file(Data* data, const char* filename) {
         }
     }
 
+    // convert base coins to cents
+
+    int* base_coins_in_cents = malloc(sizeof(int) * N);
+    for (int i = 0; i < N; i++) {
+        base_coins_in_cents[i] = cents_from_euros(base_coins[i]);
+    }
+    free(base_coins);
 
     data->coin_types_n = N;
-    data->target_sum_in_euros = V;
-    data->coin_values = base_coins;
+    data->target_sum_in_cents = cents_from_euros(V);
+    data->coin_values_in_cents = base_coins_in_cents;
 
     fclose(file);
     return true;
