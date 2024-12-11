@@ -7,5 +7,8 @@
 
 #include "helper_functions.h"
 #include "common-defines.h"
+#include "data.h"
+
+int hill_climbing(int* sol, Data data, int nIter);
 
 #endif //ALROGITHM_H
