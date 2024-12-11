@@ -9,7 +9,7 @@
 int evaluate_solution(int* sol, const int* coinValues, int nCoinTypes, int target) {
 	// Penalize invalid solutions
 	// TODO try doing repair instead if we have time
-	if (!is_valid_solution(sol, coinValues, nCoinTypes, target)) return -1;
+	if (!is_valid_solution(sol, coinValues, nCoinTypes, target)) return INT_MAX;
 	return num_of_coins_used(sol, nCoinTypes);
 }
 void generate_neighbor(int* sol, int* newSol, int solSize) {
