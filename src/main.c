@@ -7,15 +7,15 @@
 #include "file-handler.h"
 #include "alrogithm.h"
 
-
 int main(void) {
     srand(time(NULL));
 
-    char* filename = "test.txt";
+    //char* filename = "test.txt";
+    char filename[1024];
     Data data;
 
     printf("Please provide the name of a data file:");
-
+    gets(filename);
 
     if (!read_file(&data, filename)) {
         printf("Error reading config file\n");
