@@ -6,6 +6,14 @@
 #include <stdlib.h>
 #include "alrogithm.h"
 
+int* random_solution(Data* data) {
+    int* solution = (int*)malloc(sizeof(int) * data->coin_types_n);
+    for (int i = 0; i < data->coin_types_n; i++) {
+        solution[i] = rand() % 10;
+    }
+    return solution;
+}
+
 int evaluate_solution(int* sol, const int* coinValues, int nCoinTypes, int target) {
 	// Penalize invalid solutions
 	// TODO try doing repair instead if we have time
