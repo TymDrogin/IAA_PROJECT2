@@ -25,8 +25,11 @@ void repair_solution(int* sol, const Data* data) {
 				if (sol[i] > 0) {
 					// For each coin value try to remove the maximum number of them possible (lowers the cost)
 					int max_n_of_coins_to_remove = deviation / data->coin_values_in_cents[i];
-					int n_to_remove = (max_n_of_coins_to_remove > sol[i]) ? sol[i] : max_n_of_coins_to_remove;
-					sol[i] -= n_to_remove;
+					if (max_n_of_coins_to_remove > sol[i]) {
+						sol[i] = 0;
+					} else {
+						sol[i] -= max_n_of_coins_to_remove;
+					}
 					deviation = solution_target_diff(sol, data);
 
 					if (deviation == 0) break; // Stop early if target is reached
