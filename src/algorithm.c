@@ -51,7 +51,6 @@ void repair_solution(int* sol, const Data* data) {
 
 int solution_cost(const int* solution, const Data* data) {
 	// Penalize invalid solutions
-	// TODO try doing repair instead if we have time
 	if (!is_valid_solution(solution, data)) return INT_MAX;
 	return num_of_coins_used(solution, data);
 }
@@ -78,6 +77,9 @@ int* generate_neighbor(const int* sol, const Data* data) {
 	new_sol[pos3]++;
 	new_sol[pos4]--;
 
+	if (!is_valid_solution(new_sol, data)) {
+		repair_solution(new_sol, data);
+	}
 	return new_sol;
 }
 
