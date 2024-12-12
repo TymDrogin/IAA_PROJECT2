@@ -17,13 +17,4 @@ int* random_solution(Data* data);
 
 
 
-
-
-
-
-
-
-
-
-
 #endif //ALROGITHM_H

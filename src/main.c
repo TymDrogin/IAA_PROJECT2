@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 
 #include "common-defines.h"
-#include <string.h>
 #include "data.h"
 #include "helper_functions.h"
 #include "file-handler.h"
@@ -27,10 +27,6 @@ int main(void) {
     } else {
         print_data(&data);
     }
-
-
-
-
 
     int* solution = random_solution(&data);
     printf("The solution is: %d %d %d ", solution[0], solution[1], solution[2]);
