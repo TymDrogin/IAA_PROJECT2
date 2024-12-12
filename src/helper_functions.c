@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-
 // TODO: ADD ROUND
 
 // Conversion functions
@@ -18,26 +17,26 @@ float euros_from_cents(const int cents) {
 }
 
 // Solution related
-int solution_total_in_cents(const int* solution, const int* base_coins, const int coin_types_num) {
+int solution_total_in_cents(const int* solution, const Data* data) {
     int total = 0;
-    for (int i = 0; i < coin_types_num; i++) {
-        total += base_coins[i] * solution[i];
+    for (int i = 0; i < data->coin_types_n; i++) {
+        total += data->coin_values_in_cents[i] * solution[i];
     }
     return total;
 }
-int solution_target_diff(const int* solution, const int* base_coins, const int coin_types_num, const int target_in_cents) {
-    return solution_total_in_cents(solution, base_coins, coin_types_num) - target_in_cents;
+int solution_target_diff(const int* solution, const Data* data) {
+    return solution_total_in_cents(solution, data) - data->target_sum_in_cents;
 }
-int num_of_coins_used(const int* solution, const int coin_types_num) {
+int num_of_coins_used(const int* solution, const Data* data) {
     int num_of_coins = 0;
-    for (int i = 0; i < coin_types_num; i++) {
+    for (int i = 0; i < data->coin_types_n; i++) {
         num_of_coins += solution[i];
     }
     return num_of_coins;
 };
 
-bool is_valid_solution(const int* solution, const int* base_coins, const int coin_types_num, const int target_in_cents) {
-    if (solution_total_in_cents(solution, base_coins, coin_types_num) != target_in_cents) {
+bool is_valid_solution(const int* solution, const Data* data) {
+    if (solution_total_in_cents(solution, data) != data->target_sum_in_cents) {
         return false;
     }
     return true;
