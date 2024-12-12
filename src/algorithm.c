@@ -6,11 +6,12 @@
 #include <stdlib.h>
 #include "alrogithm.h"
 
-int* random_solution(Data* data) {
+int* get_random_solution(Data* data) {
     int* solution = (int*)malloc(sizeof(int) * data->coin_types_n);
     for (int i = 0; i < data->coin_types_n; i++) {
         solution[i] = rand() % RANGE_OF_RANDOM_NUMS_FOR_SOLUTION;
     }
+	repair_solution(solution, data);
     return solution;
 }
 

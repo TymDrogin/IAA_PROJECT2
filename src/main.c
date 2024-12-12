@@ -35,17 +35,21 @@ int main(void) {
         print_data(&data);
     }
 
-    int* solution = random_solution(&data);
+    int* solution = get_random_solution(&data);
     printf("\nThe initial solution is: ");
     print_solution(solution, &data);
-    printf("\n");
+    repair_solution(solution, &data);
+    if (is_valid_solution(solution, &data)) {
+        printf("\nThe repaired solution is: ");
+        print_solution(solution, &data);
+    }
 
-    for (int i = 0; i < 10; i++) {
-        int cost = hill_climbing(solution, &data, /*TODO let user specify iteration count?*/10);
+    /* for (int i = 0; i < 10; i++) {
+        int cost = hill_climbing(solution, &data, 10);
         printf("Current solution: ");
         print_solution(solution, &data);
         printf("With cost %d\n\n", cost);
     }
-
+    */
     return 0;
 }
