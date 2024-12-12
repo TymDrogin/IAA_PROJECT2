@@ -29,7 +29,9 @@ int main(void) {
     }
 
     int* solution = random_solution(&data);
-    printf("The solution is: %d %d %d ", solution[0], solution[1], solution[2]);
+    printf("The random solution is: %d %d %d ", solution[0], solution[1], solution[2]);
+    repair_solution(solution, &data);
+    printf("The repaired solution is: %d %d %d ", solution[0], solution[1], solution[2]);
 
     return 0;
 }
