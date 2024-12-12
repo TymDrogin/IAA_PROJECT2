@@ -4,6 +4,7 @@
 
 #ifndef ALROGITHM_H
 #define ALROGITHM_H
+#include <limits.h>
 
 #include "helper_functions.h"
 #include "data.h"
