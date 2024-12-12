@@ -14,7 +14,22 @@ int* random_solution(Data* data) {
     return solution;
 }
 
-int evaluate_solution(const int* solution, const Data* data) {
+
+void repair_solution(int* sol, Data* data) {
+	int deviation = solution_target_diff(sol, data);
+
+
+
+
+
+}
+
+
+
+
+
+
+int solution_cost(const int* solution, const Data* data) {
 	// Penalize invalid solutions
 	// TODO try doing repair instead if we have time
 	if (!is_valid_solution(solution, data)) return INT_MAX;
@@ -39,24 +54,19 @@ int* generate_neighbor(const int* sol, const Data* data) {
 	return new_sol;
 }
 
-int hill_climbing(int* sol, Data* data, int nIter) {
-	int* new_sol = malloc(data->coin_types_n * sizeof(int));
-	if (new_sol == NULL) {
-		exit(-1);
-	}
+int hill_climbing(int* initial_solution, Data* data, int num_iter) {
 
 
-	int cost = evaluate_solution(sol, data);
-	for (int i = 0; i < nIter; i++) {
-		generate_neighbor(sol, new_sol, data->coin_types_n);
+	int cost = solution_cost(initial_solution, data);
+	for (int i = 0; i < num_iter; i++) {
+		int* new_sol = generate_neighbor(initial_solution, data);
 
-		int costNeighbor = evaluate_solution(new_sol, data);
+		int costNeighbor = solution_cost(new_sol, data);
 		if (costNeighbor <= cost) {
 			cost = costNeighbor;
-			memcpy(sol, new_sol, data->coin_types_n * sizeof(int));
+			memcpy(initial_solution, new_sol, data->coin_types_n * sizeof(int));
 		}
+		free(new_sol);
 	}
-
-	free(new_sol);
 	return cost;
 }
