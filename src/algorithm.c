@@ -9,7 +9,7 @@
 int* random_solution(Data* data) {
     int* solution = (int*)malloc(sizeof(int) * data->coin_types_n);
     for (int i = 0; i < data->coin_types_n; i++) {
-        solution[i] = rand() % 10;
+        solution[i] = rand() % RANGE_OF_RANDOM_NUMS_FOR_SOLUTION;
     }
     return solution;
 }

@@ -7,14 +7,6 @@
 
 // PROGRAM CONFIG
 #define CENTS_IN_ONE_EURO 100
-
-#define BASE_COIN_TYPES_NUM 4
-enum Coins {
-    FIVE_CENTS = 5,
-    TEN_CENTS = 10,
-    TWENTY_CENTS = 20,
-    FIFTY_CENTS = 50,
-};
-extern const int BASE_COINS[];
+#define RANGE_OF_RANDOM_NUMS_FOR_SOLUTION 10
 
 #endif //COMMON_DEFINES_H
