@@ -20,7 +20,7 @@ float euros_from_cents(const int cents) {
 int solution_total_in_cents(const int* solution, const Data* data) {
     int total = 0;
     for (int i = 0; i < data->coin_types_n; i++) {
-        total += data->coin_values_in_cents[i]     free(data);* solution[i];
+        total += data->coin_values_in_cents[i] * solution[i];
     }
     return total;
 }
