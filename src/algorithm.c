@@ -20,29 +20,37 @@ int evaluate_solution(int* solution, Data* data) {
 	if (!is_valid_solution(solution, data)) return INT_MAX;
 	return num_of_coins_used(solution, data);
 }
-void generate_neighbor(int* sol, int* newSol, int solSize) {
-	memcpy(newSol, sol, solSize * sizeof(int));
-	// TODO
+void generate_neighbor(int* sol, int* new_sol, int sol_size) {
+	memcpy(new_sol, sol, sol_size * sizeof(int));
+	
+	int pos1 = rand() % sol_size;
+	int pos2;
+	do {
+		pos2 = rand() % sol_size;
+	} while (pos2 == pos1);
+
+	new_sol[pos1]++;
+	new_sol[pos2]--;
 }
 
 int hill_climbing(int* sol, Data* data, int nIter) {
-	int* newSol = malloc(data->coin_types_n * sizeof(int));
-	if (newSol == NULL) {
+	int* new_sol = malloc(data->coin_types_n * sizeof(int));
+	if (new_sol == NULL) {
 		exit(-1);
 	}
 
 
 	int cost = evaluate_solution(sol, data);
 	for (int i = 0; i < nIter; i++) {
-		generate_neighbor(sol, newSol, data->coin_types_n);
+		generate_neighbor(sol, new_sol, data->coin_types_n);
 
-		int costNeighbor = evaluate_solution(newSol, data);
+		int costNeighbor = evaluate_solution(new_sol, data);
 		if (costNeighbor <= cost) {
 			cost = costNeighbor;
-			memcpy(sol, newSol, data->coin_types_n * sizeof(int));
+			memcpy(sol, new_sol, data->coin_types_n * sizeof(int));
 		}
 	}
 
-	free(newSol);
+	free(new_sol);
 	return cost;
 }
