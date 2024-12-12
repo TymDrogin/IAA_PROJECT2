@@ -22,6 +22,7 @@ void repair_solution(int* sol, const Data* data) {
 			// Decrement solution starting with smaller coins
 			for (int i = 0; i < data->coin_types_n; i++) {
 				if (sol[i] > 0) {
+					// For each coin value try to remove the maximum number of them possible (lowers the cost)
 					int max_n_of_coins_to_remove = deviation / data->coin_values_in_cents[i];
 					int n_to_remove = (max_n_of_coins_to_remove > sol[i]) ? sol[i] : max_n_of_coins_to_remove;
 					sol[i] -= n_to_remove;
@@ -31,8 +32,9 @@ void repair_solution(int* sol, const Data* data) {
 				}
 			}
 		} else {
-			// Increment solution starting with bigger coins
+			// Increment solution starting with bigger coins (lowers the cost)
 			for (int i = data->coin_types_n - 1; i >= 0; i--) {
+				// For each coin value try to add the maximum number of them possible
 				int max_n_of_coins_to_add = -deviation / data->coin_values_in_cents[i];
 				sol[i] += max_n_of_coins_to_add;
 				deviation = solution_target_diff(sol, data);
