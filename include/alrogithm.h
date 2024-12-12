@@ -12,7 +12,7 @@
 #include "data.h"
 
 int hill_climbing(int* sol, Data* data, int nIter);
-
+void repair_solution(int* sol, const Data* data);
 int* random_solution(Data* data);
 
 

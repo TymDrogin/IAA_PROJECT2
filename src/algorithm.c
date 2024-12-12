@@ -15,33 +15,34 @@ int* random_solution(Data* data) {
 }
 
 
-void repair_solution(int* sol, Data* data) {
+void repair_solution(int* sol, const Data* data) {
 	int deviation = solution_target_diff(sol, data);
-
 	while (deviation != 0) {
 		if (deviation > 0) {
 			// Decrement solution starting with smaller coins
 			for (int i = 0; i < data->coin_types_n; i++) {
 				if (sol[i] > 0) {
 					int max_n_of_coins_to_remove = deviation / data->coin_values_in_cents[i];
-					if (max_n_of_coins_to_remove > sol[i]) {
-						sol[i] = 0;
-					} else {
-						sol[i] -= max_n_of_coins_to_remove;
-					}
+					int n_to_remove = (max_n_of_coins_to_remove > sol[i]) ? sol[i] : max_n_of_coins_to_remove;
+					sol[i] -= n_to_remove;
 					deviation = solution_target_diff(sol, data);
+
+					if (deviation == 0) break; // Stop early if target is reached
 				}
 			}
 		} else {
 			// Increment solution starting with bigger coins
-			for (int i = data->coin_types_n - 1; i >= 0 ; i--) {
+			for (int i = data->coin_types_n - 1; i >= 0; i--) {
 				int max_n_of_coins_to_add = -deviation / data->coin_values_in_cents[i];
 				sol[i] += max_n_of_coins_to_add;
 				deviation = solution_target_diff(sol, data);
+
+				if (deviation == 0) break; // Stop early if target is reached
 			}
 		}
 	}
 }
+
 
 
 
