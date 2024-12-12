@@ -14,11 +14,11 @@ int* random_solution(Data* data) {
     return solution;
 }
 
-int evaluate_solution(int* sol, Data* data) {
+int evaluate_solution(int* solution, Data* data) {
 	// Penalize invalid solutions
 	// TODO try doing repair instead if we have time
-	if (!is_valid_solution(sol, data->coin_values_in_cents, data->coin_types_n, data->target_sum_in_cents)) return INT_MAX;
-	return num_of_coins_used(sol, data->coin_types_n);
+	if (!is_valid_solution(solution, data)) return INT_MAX;
+	return num_of_coins_used(solution, data);
 }
 void generate_neighbor(int* sol, int* newSol, int solSize) {
 	memcpy(newSol, sol, solSize * sizeof(int));

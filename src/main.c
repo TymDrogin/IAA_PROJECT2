@@ -2,6 +2,7 @@
 #include <time.h>
 
 #include "common-defines.h"
+#include <string.h>
 #include "data.h"
 #include "helper_functions.h"
 #include "file-handler.h"
@@ -10,19 +11,26 @@
 int main(void) {
     srand(time(NULL));
 
-    //char* filename = "test.txt";
-    char filename[1024];
+    char filename[256];
+
+    printf("Please provide the name of a data file: ");
+    if (fgets(filename, sizeof(filename), stdin)) {
+        // Remove trailing newline character if present
+        filename[strcspn(filename, "\n")] = '\0';
+    }
+    printf("You entered: %s\n", filename);
+
     Data data;
-
-    printf("Please provide the name of a data file:");
-    gets(filename);
-
     if (!read_file(&data, filename)) {
         printf("Error reading config file\n");
         exit(1);
     } else {
         print_data(&data);
     }
+
+
+
+
 
     int* solution = random_solution(&data);
     printf("The solution is: %d %d %d ", solution[0], solution[1], solution[2]);

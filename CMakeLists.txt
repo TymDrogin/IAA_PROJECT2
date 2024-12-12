@@ -9,11 +9,13 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.c)
 
 
-configure_file(
-        ${CMAKE_SOURCE_DIR}/test.txt  # Source file path
-        ${CMAKE_BINARY_DIR}/test.txt # Destination in the build directory
-        COPYONLY                     # Copy without modification
-)
+file(GLOB TXT_FILES "${CMAKE_SOURCE_DIR}/*.txt")
+
+# Loop through each file and configure it
+foreach(FILE ${TXT_FILES})
+    get_filename_component(FILENAME ${FILE} NAME)
+    configure_file(${FILE} ${CMAKE_BINARY_DIR}/${FILENAME} COPYONLY)
+endforeach()
 
 
 
