@@ -8,6 +8,13 @@
 #include "file-handler.h"
 #include "alrogithm.h"
 
+void print_solution(int* solution, const Data* data) {
+    for (int i = 0; i < data->coin_types_n; i++) {
+        printf("%d ", solution[i]);
+    }
+    printf("\n");
+}
+
 int main(void) {
     srand(time(NULL));
 
@@ -29,9 +36,16 @@ int main(void) {
     }
 
     int* solution = random_solution(&data);
-    printf("The random solution is: %d %d %d ", solution[0], solution[1], solution[2]);
-    repair_solution(solution, &data);
-    printf("The repaired solution is: %d %d %d ", solution[0], solution[1], solution[2]);
+    printf("\nThe initial solution is: ");
+    print_solution(solution, &data);
+    printf("\n");
+
+    for (int i = 0; i < 10; i++) {
+        int cost = hill_climbing(solution, &data, /*TODO let user specify iteration count?*/10);
+        printf("Current solution: ");
+        print_solution(solution, &data);
+        printf("With cost %d\n\n", cost);
+    }
 
     return 0;
 }

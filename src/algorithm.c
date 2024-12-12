@@ -53,7 +53,6 @@ void repair_solution(int* sol, const Data* data) {
 
 int solution_cost(const int* solution, const Data* data) {
 	// Penalize invalid solutions
-	// TODO try doing repair instead if we have time
 	if (!is_valid_solution(solution, data)) return INT_MAX;
 	return num_of_coins_used(solution, data);
 }
@@ -61,24 +60,32 @@ int* generate_neighbor(const int* sol, const Data* data) {
 	int* new_sol = (int*)malloc(sizeof(int) * data->coin_types_n);
 	memcpy(new_sol, sol, data->coin_types_n * sizeof(int));
 
-	// first random position to mutate
-	int pos1 = rand() % data->coin_types_n;
-	// first random position to mutate
-	int pos2;
+	// Random positions to mutate
+	int pos1, pos2, pos3, pos4;
+	pos1 = rand() % data->coin_types_n;
 	// Make sure positions are different
 	do {
 		pos2 = rand() % data->coin_types_n;
-	} while (pos2 == pos1);
+	} while (pos2 == pos1 || new_sol[pos2] <= 0);
+		
+	pos3 = rand() % data->coin_types_n;
+	// Make sure positions are different
+	do {
+		pos4 = rand() % data->coin_types_n;
+	} while (pos4 == pos3 || new_sol[pos4] <= 0);
 
 	new_sol[pos1]++;
 	new_sol[pos2]--;
+	new_sol[pos3]++;
+	new_sol[pos4]--;
 
+	if (!is_valid_solution(new_sol, data)) {
+		repair_solution(new_sol, data);
+	}
 	return new_sol;
 }
 
 int hill_climbing(int* initial_solution, Data* data, int num_iter) {
-
-
 	int cost = solution_cost(initial_solution, data);
 	for (int i = 0; i < num_iter; i++) {
 		int* new_sol = generate_neighbor(initial_solution, data);
