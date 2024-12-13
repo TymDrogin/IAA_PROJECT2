@@ -31,9 +31,9 @@ void repair_solution(int* sol, const Data* data) {
 						sol[i] -= max_n_of_coins_to_remove;
 					}
 					deviation = solution_target_diff(sol, data);
-
-					if (deviation == 0) break; // Stop early if target is reached
+					 // Stop early if target is reached
 				}
+				if (deviation == 0) break;
 			}
 		} else {
 			// Increment solution starting with bigger coins (lowers the cost)
