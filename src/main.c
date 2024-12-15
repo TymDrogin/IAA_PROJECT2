@@ -44,7 +44,7 @@ int main(void) {
         print_solution(solution, &data);
     }
 
-     for (int i = 0; i < 10; i++) {
+     for (int i = 0; i < 100; i++) {
         int cost = hill_climbing(solution, &data, 20);
         printf("Current solution: ");
         print_solution(solution, &data);

@@ -61,6 +61,10 @@ int solution_cost(const int* solution, const Data* data) {
 	return num_of_coins_used(solution, data);
 }
 int* generate_neighbor(const int* sol, const Data* data, int num_pos_to_mutate) {
+	int* new_sol = (int*)malloc(sizeof(int) * data->coin_types_n);
+	memcpy(new_sol, sol, data->coin_types_n * sizeof(int));
+
+
 	// Array to hold the indices
 	int indices[data->coin_types_n];
 	for (int i = 0; i < data->coin_types_n; i++) {
@@ -76,25 +80,24 @@ int* generate_neighbor(const int* sol, const Data* data, int num_pos_to_mutate) 
 		indices[j] = temp;
 	}
 
-	// Select the first 'select_count' indices
+	// Select the first random indicies indices
 	if (num_pos_to_mutate > data->coin_types_n) {
 		num_pos_to_mutate = data->coin_types_n;
 	}
+
+
 	int pos_to_mutate[num_pos_to_mutate];
 	for (int i = 0; i < num_pos_to_mutate; i++) {
 		pos_to_mutate[i] = indices[i];
 	}
+
 	// Mutate solution
-	int* new_sol = (int*)malloc(sizeof(int) * data->coin_types_n);
-	memcpy(new_sol, sol, data->coin_types_n * sizeof(int));
-
-
 	for (int i = 0; i < num_pos_to_mutate; i++) {
-		if (i % 2) {
-			new_sol[pos_to_mutate[i]]++;
+		if (rand() % 2 == 0) {
+			new_sol[pos_to_mutate[i]] += 1;
 		} else {
 			if (new_sol[pos_to_mutate[i]] - 1 >= 0) {
-				new_sol[pos_to_mutate[i]]--;
+				new_sol[pos_to_mutate[i]] -= 1;
 			} else {
 				new_sol[pos_to_mutate[i]] = 0;
 			}
