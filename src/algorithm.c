@@ -19,23 +19,34 @@ int* get_random_solution(Data* data, const bool get_valid) {
 
 
 void repair_solution(int* sol, const Data* data) {
+	if (sol == NULL) {
+		exit(5);
+	}
+
 	int deviation = solution_target_diff(sol, data);
-	while (deviation != 0) {
-		for (int i = data->coin_types_n; i >= 0; i--) {
-			if (deviation > 0) {
-				int coins_to_remove = deviation / data->coin_values_in_cents[i];
-				if (sol[i] >= coins_to_remove) {
-					sol[i] -= coins_to_remove;
-				} else {
-					sol[i] = 0;
-				}
-			} else if (deviation < 0) {
-				int coins_to_add = abs(deviation / data->coin_values_in_cents[i]);
-				sol[i] += coins_to_add;
+	if (deviation > 0) {
+		for (int i = 0; i < data->coin_types_n; i++) {
+			int coins_to_remove = deviation / data->coin_values_in_cents[i];
+			if (sol[i] >= coins_to_remove) {
+				sol[i] -= coins_to_remove;
 			} else {
-				return;
+				sol[i] = 0;
 			}
 			deviation = solution_target_diff(sol, data);
+			if (deviation <= 0) {
+				break;
+			}
+		}
+	}
+	if (deviation < 0) {
+		for (int i = data->coin_types_n - 1; i >= 0; i--) {
+			int coins_to_add = abs(deviation / data->coin_values_in_cents[i]);
+			sol[i] += coins_to_add;
+
+			deviation = solution_target_diff(sol, data);
+			if (deviation >= 0) {
+				break;
+			}
 		}
 	}
 }
