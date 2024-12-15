@@ -8,6 +8,11 @@ struct Data {
     int target_sum_in_cents;
     int coin_types_n;
     int* coin_values_in_cents;
+
+    int population_n;
+    int generations_n;
+    float mutation_chance;
+    float crossover_chance;
 };
 typedef struct Data Data;
 
