@@ -25,7 +25,7 @@ void repair_solution(int* sol, const Data* data) {
 
 	int deviation = solution_target_diff(sol, data);
 	if (deviation > 0) {
-		for (int i = data->coin_types_n - 1; i >= 0; i--) {
+		for (int i = 0; i < data->coin_types_n; i++) {
 			int coins_to_remove = deviation / data->coin_values_in_cents[i];
 			if (sol[i] >= coins_to_remove) {
 				sol[i] -= coins_to_remove;
