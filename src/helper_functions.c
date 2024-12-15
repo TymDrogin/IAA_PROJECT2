@@ -5,6 +5,7 @@
 
 #include <stdlib.h>
 #include <math.h>
+#include "alrogithm.h"
 
 // TODO: ADD ROUND
 
@@ -41,3 +42,12 @@ bool is_valid_solution(const int* solution, const Data* data) {
     }
     return true;
 };
+
+Individual get_best(Individual* pop, const Data* data, Individual best) {
+    for (int i = 0; i < data->population_n; i++) {
+        if (best.fitness > pop[i].fitness) {
+            best = pop[i];
+        }
+    }
+    return best;
+}
