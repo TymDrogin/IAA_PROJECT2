@@ -6,12 +6,14 @@
 #include <stdlib.h>
 #include "alrogithm.h"
 
-int* get_random_solution(Data* data) {
+int* get_random_solution(Data* data, const bool get_valid) {
     int* solution = (int*)malloc(sizeof(int) * data->coin_types_n);
     for (int i = 0; i < data->coin_types_n; i++) {
         solution[i] = rand() % RANGE_OF_RANDOM_NUMS_FOR_SOLUTION;
     }
-	repair_solution(solution, data);
+	if (get_valid) {
+		repair_solution(solution, data);
+	};
     return solution;
 }
 
@@ -19,32 +21,21 @@ int* get_random_solution(Data* data) {
 void repair_solution(int* sol, const Data* data) {
 	int deviation = solution_target_diff(sol, data);
 	while (deviation != 0) {
-		if (deviation > 0) {
-			// Decrement solution starting with smaller coins
-			for (int i = 0; i < data->coin_types_n; i++) {
-				if (sol[i] > 0) {
-					// For each coin value try to remove the maximum number of them possible (lowers the cost)
-					int max_n_of_coins_to_remove = deviation / data->coin_values_in_cents[i];
-					if (max_n_of_coins_to_remove > sol[i]) {
-						sol[i] = 0;
-					} else {
-						sol[i] -= max_n_of_coins_to_remove;
-					}
-					deviation = solution_target_diff(sol, data);
-					 // Stop early if target is reached
+		for (int i = data->coin_types_n; i >= 0; i--) {
+			if (deviation > 0) {
+				int coins_to_remove = deviation / data->coin_values_in_cents[i];
+				if (sol[i] >= coins_to_remove) {
+					sol[i] -= coins_to_remove;
+				} else {
+					sol[i] = 0;
 				}
-				if (deviation == 0) break;
+			} else if (deviation < 0) {
+				int coins_to_add = abs(deviation / data->coin_values_in_cents[i]);
+				sol[i] += coins_to_add;
+			} else {
+				return;
 			}
-		} else {
-			// Increment solution starting with bigger coins (lowers the cost)
-			for (int i = data->coin_types_n - 1; i >= 0; i--) {
-				// For each coin value try to add the maximum number of them possible
-				int max_n_of_coins_to_add = -deviation / data->coin_values_in_cents[i];
-				sol[i] += max_n_of_coins_to_add;
-				deviation = solution_target_diff(sol, data);
-
-				if (deviation == 0) break; // Stop early if target is reached
-			}
+			deviation = solution_target_diff(sol, data);
 		}
 	}
 }
@@ -82,6 +73,11 @@ int* generate_neighbor(const int* sol, const Data* data) {
 	new_sol[pos2]--;
 	new_sol[pos3]++;
 	new_sol[pos4]--;
+	for (int i = 0; i < data->coin_types_n; i++) {
+		if (new_sol[i] < 0) {
+			new_sol[i] = 0;
+		}
+	}
 
 	if (!is_valid_solution(new_sol, data)) {
 		repair_solution(new_sol, data);
